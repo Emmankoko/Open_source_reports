@@ -135,6 +135,6 @@ this loops until process is terminated by user. this statistics may change in re
 
 - integrtate ALTQ in the NPF packet filter and dissociate the PF packet filter from ALTQ.
 
-- NPF is a packet filter with stateful inspection, Natural Address Translation, IP sets, etc. [find out here](http://rmind.github.io/npf/)
+- NPF is a packet filter with stateful inspection, Network Address Translation, IP sets, etc. [find out here](http://rmind.github.io/npf/)
 
 Special thanks to my mentors who availed themselves to help me overcome all roadblocks that we encountered.
