@@ -82,6 +82,8 @@ all work of this phase is integrated in the [altq_codel](https://github.com/Emma
 
 - in the [codel header](https://github.com/Emmankoko/altq_refactoring_gsoc/blob/altq_codel/sys/altq/altq_codel.h) file, I included IOCLT calls for use from userland and also removed userland useful structs from KERNEL declaration blocks.
 
+- implemented device interface(open, close, and ioctl functions) in the implementation API as the driect kernel-userland communication to configure parameters, fetch statistics, attach and detach to interface, etc.
+
 - introduced CoDel flags to be used on other schedulars and also inthe userland.
 
 #### USERLAND WORK
@@ -132,5 +134,7 @@ this loops until process is terminated by user. this statistics may change in re
 - properly set up ATF test which is the network testing kit in netbsd on larger systems, more services, on different networks.
 
 - integrtate ALTQ in the NPF packet filter and dissociate the PF packet filter from ALTQ.
+
+- NPF is a packet filter with stateful inspection, Natural Address Translation, IP sets, etc. [find out here](http://rmind.github.io/npf/)
 
 Special thanks to my mentors who availed themselves to help me overcome all roadblocks that we encountered.
