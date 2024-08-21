@@ -76,15 +76,15 @@ all work of this phase is integrated in the [altq_codel](https://github.com/Emma
 
 #### KERNEL WORK
 
-- imported the direct CoDel implementation which is open sourced into [sys/altq/altq_codel.c](https://github.com/Emmankoko/altq_refactoring_gsoc/blob/altq_codel/sys/altq/altq_codel.c) file. added the corresponding header file to use both external internal declarations.
+- imported the direct CoDel implementation which is open sourced into [sys/altq/altq_codel.c](https://github.com/Emmankoko/altq_refactoring_gsoc/blob/altq_codel/sys/altq/altq_codel.c) file. added the corresponding header file to use both external and internal declarations.
 
 - refactored the code to use NetBSD components, tools, functions, types etc that semantically agree with the previously implemented scheme.
 
-- in the [codel header](https://github.com/Emmankoko/altq_refactoring_gsoc/blob/altq_codel/sys/altq/altq_codel.h) file, I included IOCLT calls for use from userland and also removed userland useful structs from KERNEL declaration blocks.
+- in the [codel header](https://github.com/Emmankoko/altq_refactoring_gsoc/blob/altq_codel/sys/altq/altq_codel.h) file, I included IOCTL calls for use from userland and also removed userland useful structs from KERNEL declaration blocks.
 
 - implemented device interface(open, close, and ioctl functions) in the implementation API as the driect kernel-userland communication to configure parameters, fetch statistics, attach and detach to interface, etc.
 
-- introduced CoDel flags to be used on other schedulars and also inthe userland.
+- introduced CoDel flags to be used on other schedulars and also in the userland.
 
 #### USERLAND WORK
 
@@ -126,7 +126,7 @@ xmit: 0 pkts, drops: 0 pkts <br>
 throughput : 53 kbps
 
 --------------
-this loops until process is terminated by user. this statistics may change in respond to services using your network and how the user admin configures it.
+this loops until the process is terminated by user. this statistics may change in respond to services using your network and how the user admin configures it.
 
 
 #### TODO AFTER GSoC:
@@ -135,6 +135,6 @@ this loops until process is terminated by user. this statistics may change in re
 
 - integrtate ALTQ in the NPF packet filter and dissociate the PF packet filter from ALTQ.
 
-- NPF is a packet filter with stateful inspection, Network Address Translation, IP sets, etc. [find out here](http://rmind.github.io/npf/)
+- NPF is a packet filter with stateful inspection, Network Address Translation, IP sets, etc. [find out here](http://rmind.github.io/npf/). It was designed purposely for the NETBSD operating system and offers more as compared to the traditional packet filters available.
 
 Special thanks to my mentors who availed themselves to help me overcome all roadblocks that we encountered.
