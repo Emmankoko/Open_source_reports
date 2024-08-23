@@ -133,7 +133,9 @@ NB: when no parameters are set, codel uses a default target of 5 milliseconds an
 
 #### ANALYSIS
 
-[cablelabs](https://www.cablelabs.com) did a preliminary study of CoDel AQM in a DOCSIS network assessing the Quality of service related to a Simulated Cable Modem. Codel indeeds proves to mitigate an appreciable portion of the bufferbloat issue.  Below is a simple analysis to demonstrate CoDel improvements to the field of network quality of service.
+[cablelabs](https://www.cablelabs.com) did a preliminary study of CoDel AQM in a DOCSIS network assessing the Quality of service related to a Simulated Cable Modem. Codel indeed proves to mitigate an appreciable portion of the bufferbloat issue.  Below is a simple analysis to demonstrate CoDel improvements to the field of network quality of service.
+
+Below shows the evolution of queuing delay, and illustrates the gain provided by Buffer Control, whereby the worst case queuing delay is bounded by the 50 ms buffer size. instances were set with Codel and without Codel.
 
 <img src="./Screenshot 2024-08-23 at 5.28.42 PM.png">
 
