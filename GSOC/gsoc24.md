@@ -70,7 +70,7 @@ see [this commit](https://github.com/Emmankoko/src/commit/570a31a8b74881725750f1
 
 <h3 style="text-align: center;"> PHASE 2</h3>
 
-Spent the second phase integrating [Codel](https://en.wikipedia.org/wiki/CoDel) active queue management in NetBSD. Codel is an active queue management used in network routing primarily designed to overcome bufferfloat in networking hardwares. it was to manage queues under control of the minimum delays experiencedby the packets. <br>
+Spent the second phase integrating [Codel](https://en.wikipedia.org/wiki/CoDel) active queue management in NetBSD. Codel is an active queue management used in network routing primarily designed to overcome bufferbloat in networking hardwares. it was to manage queues under control of the minimum delays experiencedby the packets. <br>
 
 all work of this phase is integrated in the [altq_codel](https://github.com/Emmankoko/altq_refactoring_gsoc/tree/altq_codel/sys/altq) branch.
 
