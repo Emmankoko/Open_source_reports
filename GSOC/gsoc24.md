@@ -70,7 +70,8 @@ see [this commit](https://github.com/Emmankoko/src/commit/570a31a8b74881725750f1
 
 <h3 style="text-align: center;"> PHASE 2</h3>
 
-Spent the second phase integrating [Codel](https://en.wikipedia.org/wiki/CoDel) active queue management in NetBSD. Codel is an active queue management used in network routing primarily designed to overcome bufferbloat in networking hardwares. it was to manage queues under control of the minimum delays experiencedby the packets. <br>
+Spent the second phase integrating [Codel](https://en.wikipedia.org/wiki/CoDel) active queue management in NetBSD. Codel is an active queue management used in network routing primarily designed to overcome bufferbloat in networking hardwares. it was to manage queues under control of the minimum delays experiencedby the packets. A long lasting problem faced by the internet world of computer science
+is the bufferbloat problems that has pushed the need for implementing new Active Queue Management. CoDel was proposed to be a solution not to completely swallow the issues with our buffer when arriving packets fill it up but at least improve the quality of our internet service. <br>
 
 all work of this phase is integrated in the [altq_codel](https://github.com/Emmankoko/altq_refactoring_gsoc/tree/altq_codel/sys/altq) branch.
 
@@ -128,6 +129,30 @@ throughput : 53 kbps
 --------------
 this loops until the process is terminated by user. this statistics may change in respond to services using your network and how the user admin configures it.
 
+NB: when no parameters are set, codel uses a default target of 5 milliseconds and interval of 100 milliseconds.
+
+#### ANALYSIS
+
+[cablelabs](https://www.cablelabs.com) did a preliminary study of CoDel AQM in a DOCSIS network assessing the Quality of service related to a Simulated Cable Modem. Codel indeeds proves to mitigate an appreciable portion of the bufferbloat issue.  Below is a simple analysis to demonstrate CoDel improvements to the field of network quality of service.
+
+<img src="./Screenshot 2024-08-23 at 5.28.42 PM.png">
+
+Queuing Delay of Simulated Cable Modem with Bufferbloat
+
+This shows the downside of overbuffering. A single TCP session will aim to keep the buffer as full as it can, causing unacceptable latency for competing traffic. Note here that the buffer is set to a fixed number of packets, which results in a maximum buffering latency of 250 ms during the ~5.5 seconds of the initial 20 Mbps burst, then jumps to 1 second from that point forward.
+
+<img src="./Screenshot 2024-08-23 at 5.28.13 PM.png">
+
+Queuing Delay of Simulated Cable Modem with CoDel AQM
+
+We see that CoDel allows the single TCP and the five TCPs to quickly ramp up to 20 Mbps (due to the large buffer), but that CoDel reacts to the large buffer and forces the TCPs to back off to the point where they have minimal queue sitting in the buffer, but still keep the channel occupied.
+
+When the buffer is configured for 130 or 170 packets, this issue goes away. Also of note is that, while CoDel generally keeps the queuing latency below the 5 ms target, at the TCP start and at the rate transition from Peak Traffic Rate to Max Sustained Rate, CoDel allows a spike in queuing latency that takes some time (~2.5 seconds) to subside.
+
+#### TAKE-AWAYS
+CoDel has been a major improvements in Active Queue Managements helping to reduce packet loss and other related downfalls in the quality of service domain.
+
+In taking this work up, I hope to propse future improvements to these studies that eventually swallows bufferbloats issues relating to underbuffering oroverbuffering.
 
 #### TODO AFTER GSoC:
 
