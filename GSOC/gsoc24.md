@@ -139,17 +139,23 @@ Below shows the evolution of queuing delay, and illustrates the gain provided by
 
 <img src="./Screenshot 2024-08-23 at 5.28.42 PM.png">
 
+Greg, Joey. CableLabs: Preliminary study of codel AQM in a DOCSIS network.  Cable Television Laboratories, Inc, 2012.
+
 Queuing Delay of Simulated Cable Modem with Bufferbloat
 
 This shows the downside of overbuffering. A single TCP session will aim to keep the buffer as full as it can, causing unacceptable latency for competing traffic. Note here that the buffer is set to a fixed number of packets, which results in a maximum buffering latency of 250 ms during the ~5.5 seconds of the initial 20 Mbps burst, then jumps to 1 second from that point forward.
 
 <img src="./Screenshot 2024-08-23 at 5.28.13 PM.png">
 
+Greg, Joey. CableLabs: Preliminary study of codel AQM in a DOCSIS network.  Cable Television Laboratories, Inc, 2012.
+
 Queuing Delay of Simulated Cable Modem with CoDel AQM
 
 We see that CoDel allows the single TCP and the five TCPs to quickly ramp up to 20 Mbps (due to the large buffer), but that CoDel reacts to the large buffer and forces the TCPs to back off to the point where they have minimal queue sitting in the buffer, but still keep the channel occupied.
 
 When the buffer is configured for 130 or 170 packets, this issue goes away. Also of note is that, while CoDel generally keeps the queuing latency below the 5 ms target, at the TCP start and at the rate transition from Peak Traffic Rate to Max Sustained Rate, CoDel allows a spike in queuing latency that takes some time (~2.5 seconds) to subside.
+
+
 
 #### TAKE-AWAYS
 CoDel has been a major improvements in Active Queue Managements helping to reduce packet loss and other related downfalls in the quality of service domain.
