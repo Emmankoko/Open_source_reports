@@ -168,6 +168,6 @@ In taking this work up, I hope to propse future improvements to these studies th
 
 - integrtate ALTQ in the NPF packet filter and dissociate the PF packet filter from ALTQ.
 
-- NPF is a packet filter with stateful inspection, Network Address Translation, IP sets, etc. [find out here](http://rmind.github.io/npf/). It was designed purposely for the NETBSD operating system and offers more as compared to the traditional packet filters available.
+- NPF is a packet filter with stateful inspection, Network Address Translation, IP sets, etc. [find out here](http://rmind.github.io/npf/). It was designed purposely for the NETBSD operating system and offers more as compared to the traditional packet filters available. certain application layer protocols are not compatible with NAT and require translation outside layer 3 and 4. such translation is performed by a packet filter extension called Application Level Gateway(ALG). NPF supports the ICMP ALG.
 
 Special thanks to my mentors who availed themselves to help me overcome all roadblocks that we encountered.
