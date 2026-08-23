@@ -86,7 +86,7 @@ for RAID 1 (stripe related properties) remains same hence adopted into RAID `N`.
 
 The current design for RAID 1 involves ASM (Address Stripe Mapping) structures that contain PDAs (Physical Disk Addresses) that are used in mapping the RAID level software addresses to the Physical Disk Addresses.
 The PDA structure contain column number, start sector, number of sectors/blocks, type of disk in setup (data/parity disk), data buffer pointer, and then the virtual RAID address corresponding to the Physical Disk Address.
-For a simple RAID 1 mirror involving two disks, the writes or reads are striped accorss the two disks
+For a simple RAID 1 mirror involving two disks, the writes or reads are striped across the two disks
 according to the value set in `SectorsPerStripeUnit` in `raid.conf`, or 128 by default when using [raidctl(8)](https://man.NetBSD.org/raidctl.8).
 So 128 sector blocks are written to each stripe are defined by the PDAs.
 
@@ -120,7 +120,7 @@ data management and reducing the risk of data loss in any case of disk failure.
 ## RAIDframe scrubbing
 
 The scrubbing implementation is a disk sector health check of all components in a disk array.
-Disks sectors are read accorss every stripe in the components and the I/O returns number of
+Disks sectors are read across every stripe in the components and the I/O returns number of
 read failures encountered on each component. Disk scrubbing is supported for all
 RAID levels in NetBSD.
 
