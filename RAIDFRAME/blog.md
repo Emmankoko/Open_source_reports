@@ -1,4 +1,4 @@
-RAIDframe Project Developments in NetBSD
+# RAIDframe Project Developments in NetBSD
 
 The Redundant Array of Independent Disks (RAID) framework is a disk management
 framework developed by Carnegie-Mellon University. NetBSD uses RAIDframe as one
@@ -6,6 +6,8 @@ of its disks management modules.
 It involves setting up multiple disks and creating a disk unit from them.
 The current NetBSD RAIDframe framework supports several levels of disks arrangement
 in a single array, see [raid(4)](https://man.NetBSD.org/raid.4).
+
+## N-way RAID 1
 
 RAID level 1 involves mirroring two disks containing the same data.
 They are structured as one primary and one parity (secondary).
@@ -24,7 +26,7 @@ For example, in a five way RAID1 setup, it will involve one primary and 4 parity
 So every disk write will attempt to write to all five disks.
 Every disk read will attempt to read from the primary disk or the secondary disk with the shortest I/O queue.
 
-- Usage
+### Usage
 
 Five disks can be configured in a 5 way RAID 1 setup for redundancy
 using [raidctl(8)](https://man.NetBSD.org/raidctl.8) with the command below:
@@ -68,15 +70,15 @@ This can be similarly translated into the raid.conf structure in the setup below
 
 ```
 
-Project deliverables
+### Project deliverables
 
-- RAIDframe Layout
+#### RAIDframe Layout
 
 A new layout structure is introduced for RAIDframe level `N`. number of primary disk remains 1.
 Number of parity/secondary becomes number of disks - 1. The rest of the layout component
 for RAID 1 (stripe related properties) remains same hence adopted into RAID `N`.
 
-- Sector/stripe mapping
+#### Sector/stripe mapping
 
 The current design for RAID 1 involves ASM (Address Stripe Mapping) structures that contain PDAs (Physical Disk Addresses) that are used in mapping the RAID level software addresses to the Physical Disk Addresses.
 The PDA structure contain column number, start sector, number of sectors/blocks, type of disk in setup (data/parity disk), data buffer pointer, and then the virtual RAID address corresponding to the Physical Disk Address.
@@ -88,13 +90,13 @@ For two disk in a RAID 1 setup, a single stripe write are defined by two PDAs fo
 For an introduction of n-way RAID 1, the number of PDAs cannot be known at compile time.
 The number of PDAs are dynamically defined by the number parity columns at runtime.
 
-- DAG execution
+#### DAG execution
 
 RAIDframe uses DAGs (Directed Acyclic Graph) to fire I/O nodes for reads and writes. These DAG nodes are also PDA dependent.
 The DAG node creation structure also needed to be updated to accommodate more than two
 PDAs when using the level `N`.
 
-- Reconstruction
+#### Reconstruction
 
 RAIDframe reconstruction has been updated to make room for RAID level `N`. When a disk fails,
 the current algorithm identifies a non-dead disk and reads the content of that disk
@@ -102,7 +104,7 @@ and writes to the spare disk. New checks for RAID N has been added to the code t
 only one non-dead disk and write to the spare disk. This avoids trying to randomly read and write across
 the disk array during a reconstruction.
 
-- Project benefit
+#### Project benefit
 
 This project adds more redundancy to your disk
 data management and reducing the risk of data loss in any case of disk failure.
@@ -111,7 +113,7 @@ data management and reducing the risk of data loss in any case of disk failure.
 
 
 
-RAIDframe scrubbing
+## RAIDframe scrubbing
 
 The scrubbing implementation is a disk sector health check of all components in a disk array.
 Disks sectors are read accorss every stripe in the components and the I/O returns number of
@@ -121,7 +123,7 @@ RAID levels in NetBSD.
 Starting a scrub on a raid device is done by using `raidctl`. Scrubbing can be done across
 certain portion of the disks or the entire disks in the array.
 
-- Usage
+### Usage
 
 RAID scrubbing is achieved by the syntax below:
 
@@ -140,7 +142,7 @@ end_stripe = 100 * 10 / 100 = 10 - 1 = 9
 
 This reads the disks from stripe index 0 to stripe index 9 (first ten stripes).
 
-- Results/kernel output after a successful scrub
+### Results/kernel output after a successful scrub
 
 ```
 raid5: Total number of read failures on Component /dev/dk1: 10
@@ -148,7 +150,7 @@ raid5: Total number of read failures on Component /dev/dk2: 4
 raid5: Total number of read failures on Component /dev/dk3: 0
 ```
 
-- Interpretation
+### Interpretation
 
 This indicates 10 read failures across `dk1`, 4 read failures across `dk2` and 0 read failures
 across `dk3`.
@@ -159,9 +161,11 @@ Omitting the percentage parameters defaults to 100 percent scrub action:
 raidctl raid5 scrub
 ```
 
-NB: `end_stripe` is reduced by 1 because indexing of stripes begins from 0.
+**Note**: `end_stripe` is reduced by 1 because indexing of stripes begins from 0.
 
 [Link to work](https://github.com/Emmankoko/altq_refactoring_gsoc/commit/36a34a5b416bb10cd5ea84dd24057b7c8a02681f)
 
 
-Future work: RAID 6 is currently being tested and improved.
+## Future works
+
+RAID 6 is currently being tested and improved too.
