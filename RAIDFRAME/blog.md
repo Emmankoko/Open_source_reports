@@ -8,7 +8,7 @@ The current NetBSD Raidframe framework supports several levels of disks arrangem
 in a single array. see raid(4).
 
 RAID level 1 involves mirroring two disks containing the same data.
-They are structrued as one primary and one parity(secondary).
+They are structured as one primary and one parity(secondary).
 Every write to the raid device writes to all disks in the setup that are alive.
 Every read from the raid device reads from the disk with the shortest I/O queue.
 if there's an encountered failure with any of the disks,
@@ -20,7 +20,7 @@ This involves setting up more than two disk in a RAID 1 array setup where you ha
 one primary disk and multiple secondary disks.
 This increases redundancy and improves the security of data critical to disk failure that could lead to data loss.
 
-Example, In a five way RAID1 setup, it will involve one primary and 4 parity/seconday disks.
+Example, In a five way RAID1 setup, it will involve one primary and 4 parity/secondary disks.
 so every disk write will attempt to write to all five disks.
 every disk read will attempt to read from the primary disk or the secondary disk with the shortest I/O queue.
 
@@ -36,7 +36,7 @@ and the rest are considered secondary.
 
 The /dev/dk* are the NetBSD disk partition (wedge) driver used for the independent disks, see dk(4) and dkctl(8).
 
-This, by default, sets up a 128 sectors per stripe unit and a first in first out queueing algorithm and a max queue length of 100.
+This, by default, sets up a 128 sectors per stripe unit and a first in first out queuing algorithm and a max queue length of 100.
 
 This can be similarly translated into the raid.conf structure in the setup below.
 
@@ -70,7 +70,7 @@ Project deliverables
 - RAIDFRAME Layout
 
 A new layout structure is introduced for RAIDFRAME level `N`. number of primary disk remains 1.
-number of parity/secondary becomes bnumber of disks - 1. The rest of the layout component
+number of parity/secondary becomes number of disks - 1. The rest of the layout component
 for RAID 1(stripe related properties) remains same hence adopted into RAID `N`.
 
 - Sector/stripe mapping
@@ -83,12 +83,12 @@ so 128 sector blocks are written to each stripe are defined by the PDAs.
 
 for two disk in a RAID 1 setup, a single stripe write are defined by two PDAs for each column.
 for an introduction of n-way RAID1, the number of PDAs cannot be known at compile time.
-The number of PDAs are dyamically defined by the number parity columns at runtime.
+The number of PDAs are dynamically defined by the number parity columns at runtime.
 
 - DAG execution
 
 RAIDFRAME uses DAGs to fire IO nodes for reads and writes. These DAG nodes are also PDA dependent.
-The DAG node creation structure also needed to be updated to commodate more than two
+The DAG node creation structure also needed to be updated to accommodate more than two
 PDAs when using the level `N`.
 
 - Reconstruction
@@ -96,8 +96,8 @@ PDAs when using the level `N`.
 RAIDFRAME Reconstruction has been updated to make room for RAID level `N`. when a disk fails,
 the current algorithm identifies a non-dead disk and reads the content of that disk
 and writes to the spare disk. new checks for RAID N has been added to the code to read from
-only one non-dead disk and write to the spare disk. This avoids trying to randomly read and write accross
-the disk array during a recontruction.
+only one non-dead disk and write to the spare disk. This avoids trying to randomly read and write across
+the disk array during a reconstruction.
 
 - Project benefit
 
@@ -115,7 +115,7 @@ Disks sectors are read accorss every stripe in the components and the I/O return
 read failures encountered on each component. Disk scrubbing is supported for all
 RAID level in NetBSD.
 
-Starting a scrub on a raid device is done by using raidctl. Scrubbing can be done accross
+Starting a scrub on a raid device is done by using raidctl. Scrubbing can be done across
 certain portion of the disks or the entire disks in the array.
 
 - Usage
@@ -134,7 +134,7 @@ end_stripe = 100 * 10 / 100 = 10 - 1 = 9
 
 This reads the disks from stripe index 0 to stripe index 9 (first ten stripes )
 
-- Resuts/kernel output after a successful scrub:
+- Results/kernel output after a successful scrub:
 
 ```
 
@@ -146,10 +146,10 @@ raid5: Total number of read failures on Component /dev/dk3: 0
 
 - Interpretation
 
-This indicates 10 read faiures accorss dk1, 4 read failures accross dk2 and 0 read faiures
-accross dk3.
+This indicates 10 read failures accorss dk1, 4 read failures across dk2 and 0 read failures
+across dk3.
 
-Ommitting the percentage parameters defaults to 100 percent scrub action:
+Omitting the percentage parameters defaults to 100 percent scrub action:
 raidctl raid5 scrub
 
 NB: end_stripe is reduced by 1 because indexing of stripes begins from 0.
