@@ -142,7 +142,7 @@ raid5: Total number of read failures on Component /dev/dk1: 10
 raid5: Total number of read failures on Component /dev/dk2: 4
 raid5: Total number of read failures on Component /dev/dk3: 0
 
-``
+```
 
 - Interpretation
 
