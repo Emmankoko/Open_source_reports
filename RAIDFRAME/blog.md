@@ -7,9 +7,16 @@ It involves setting up multiple disks and creating a disk unit from them.
 The current NetBSD RAIDframe framework supports several levels of disks arrangement
 in a single array, see [raid(4)](https://man.NetBSD.org/raid.4).
 
-## Abstract
+NetBSD's RAIDframe supports RAID levels 0, 1, 5 and 6. However, there are some limitations that this project aims to improve.
+Firstly, RAID level 1, which is also called mirroring, allows for only two disks in a single mirror pair.
+Secondly, RAIDframe scrubbing, which involves reading your disks to check for read failures, is not yet supported.
+Thirdly, RAID level 6, even though included in source, is not well tested and not encouraged to be used.
 
-In the current NetBSD's RAIDframe module, RAID levels 0, 1, 5 and 6 are included in source. There are some limitations that this project aims to improve. Firstly, RAID level 1, which is also called mirroring, allows for only two disks in a single mirror pair. Secondly, RAIDframe scrubbing, which involves reading your disks to check for read failures, is not yet supported. Thirdly, RAID level 6, even though included in source, is not well tested and not encouraged to be used. This project aims to implemment an extension of RAID level 1 called `N-way RAID1` to support multiple disks in a RAIDframe mirror, implement RAID scrubbing, and then test RAID level 6 and fix bugs found in them.
+In this project I have worked on:
+
+- Implementation of a RAID level 1 extension called **N-way RAID 1** to support multiple disks in a RAIDframe mirror
+- Implementation of **RAID scrubbing**
+- Test RAID level 6 and fix bugs
 
 ## N-way RAID 1
 
