@@ -50,10 +50,10 @@ This, by default, sets up a 128 sectors per stripe unit and a first in first out
 This can be similarly translated into the raid.conf structure in the setup below.
 
 ```
- numrow numcol numspare
+ #numrow numcol numspare
  1 5 0
 
- Identify physical disks
+ #Identify physical disks
  START disks
 /dev/dk1
 /dev/dk2
@@ -61,12 +61,12 @@ This can be similarly translated into the raid.conf structure in the setup below
 /dev/dk4
 /dev/dk5
 
- Layout is simple - 64 sectors per stripe
+ #Layout is simple - 64 sectors per stripe
  START layout
- Sect/StripeUnit StripeUnit/ParityUnit StripeUnit/ReconUnit RaidLevel
+ #Sect/StripeUnit StripeUnit/ParityUnit StripeUnit/#ReconUnit RaidLevel
  128 1 1 N
 
- No spares
+ #No spares
  START spare
 
  START queue
@@ -140,9 +140,11 @@ Consider a hundred-striped three disks raid 5 array:
 ```sh
 raidctl raid5 scrub percentage 0 10
 ```
-
+The stripe indexes that will be read for the command above are mathematically represented in a $start_stripe and $end_stripe range below.
+```
 start_stripe = 100 * 0 / 100 = 0
 end_stripe = 100 * 10 / 100 = 10 - 1 = 9
+```
 
 This reads the disks from stripe index 0 to stripe index 9 (first ten stripes).
 
