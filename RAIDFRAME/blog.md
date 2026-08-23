@@ -169,7 +169,7 @@ raid5: Total number of read failures on Component /dev/dk3: 0
 This indicates 10 read failures across `dk1`, 4 read failures across `dk2` and 0 read failures
 across `dk3`.
 
-Omitting the percentage parameters scrubs the entire array(100 percent).
+Omitting the percentage parameters scrubs the entire array (100 percent).
 
 ```sh
 raidctl raid5 scrub
