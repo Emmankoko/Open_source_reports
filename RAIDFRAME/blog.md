@@ -190,7 +190,8 @@ This is being done to provide a level of confidence in the usage of N-way RAID 1
 As part of testing, other RAID levels, eg. RAID level 0, 1, and 5, must be validated to ensure that they have not been adversely affected by the new changes. RAID level 6 will further be assessed and tested. RAID `N` work may be merged into the NetBSD tree as the replacement for the existing RAID1.
 
 ## lessons learnt
-Participating in Google Summer of Code with NetBSD has been very impactful. I have gathered lots of experience with multithreading in the kernel and also gained a deeper understanding of how storage systems operate. I would encourage anyone who wants to gain deeper understanding of computer systems to consider taking on Google summer of Code projects with NetBSD.
+
+Participating in Google Summer of Code with NetBSD has been very impactful. I have gathered lots of experience with multithreading in the kernel and also gained a deeper understanding of how storage systems operate. I would encourage anyone who wants to gain deeper understanding of computer systems to consider taking on Google Summer of Code projects with NetBSD.
 
 ## Acknowledgment
 
