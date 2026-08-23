@@ -139,7 +139,8 @@ Consider a hundred-striped three disks raid 5 array:
 ```sh
 raidctl raid5 scrub percentage 0 10
 ```
-The stripe indexes that will be read for the command above are mathematically represented in a $start_stripe and $end_stripe range below.
+The stripe indexes that will be read for the command above are mathematically represented in a `$start_stripe` and `$end_stripe` range below:
+
 ```
 start_stripe = 100 * 0 / 100 = 0
 end_stripe = 100 * 10 / 100 = 10 - 1 = 9
