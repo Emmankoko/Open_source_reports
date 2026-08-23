@@ -50,28 +50,27 @@ This, by default, sets up a 128 sectors per stripe unit and a first in first out
 This can be similarly translated into the raid.conf structure in the setup below.
 
 ```
- #numrow numcol numspare
- 1 5 0
+# numrow numcol numspare
+1 5 0
 
- #Identify physical disks
- START disks
+# Identify physical disks
+START disks
 /dev/dk1
 /dev/dk2
 /dev/dk3
 /dev/dk4
 /dev/dk5
 
- #Layout is simple - 64 sectors per stripe
- START layout
- #Sect/StripeUnit StripeUnit/ParityUnit StripeUnit/#ReconUnit RaidLevel
- 128 1 1 N
+# Layout is simple - 64 sectors per stripe
+START layout
+# Sect/StripeUnit StripeUnit/ParityUnit StripeUnit/#ReconUnit RaidLevel
+128 1 1 N
 
- #No spares
- START spare
+# No spares
+START spare
 
- START queue
- fifo 100
-
+START queue
+fifo 100
 ```
 
 ### Project deliverables
