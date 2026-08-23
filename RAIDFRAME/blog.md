@@ -97,7 +97,7 @@ So 128 sector blocks are written to each stripe as defined by the PDAs.
 
 For two disk in a RAID 1 setup, a single stripe write is defined by one PDA for each column.
 For the introduction of n-way RAID 1, the number of PDAs cannot be known at compile time.
-The number of PDAs are dynamically defined by the number parity columns at runtime. This is because, the number of secondary disks in an N-way setup can vary as compared to RAID 1 which is known to have one primary and one seconday disk.
+The number of PDAs are dynamically defined by the number parity columns at runtime. This is because, the number of secondary disks in an N-way setup can vary as compared to RAID 1 which is known to have one primary and one secondary disk.
 
 #### DAG execution
 
@@ -180,7 +180,7 @@ raidctl raid5 scrub
 
 ## Testing
 
-Testing these improvements involves setting up different layouts of N-way RAID 1 with different disk sizes. A 2 Gigabyte three-way RAID 1 device and a 10 Gigabyte five-way RAID 1 are separately configured and being used for testing. Operations such as file systems creation, mounting, unmounting, writing raw bytes, component failing, reconstruction, hot spare addition, rebuiding in place etc. are performed as part of this testing.
+Testing these improvements involves setting up different layouts of N-way RAID 1 with different disk sizes. A 2 Gigabyte three-way RAID 1 device and a 10 Gigabyte five-way RAID 1 are separately configured and being used for testing. Operations such as file systems creation, mounting, unmounting, writing raw bytes, component failing, reconstruction, hot spare addition, rebuilding in place etc. are performed as part of this testing.
 This is being done to provide a level of confidence in the usage of N-way RAID 1 and the rest of the RAIDframe subsystems.
 
 
@@ -189,8 +189,8 @@ This is being done to provide a level of confidence in the usage of N-way RAID 1
 As part of testing, other RAID levels, eg. RAID level 0, 1, and 5, must be validated to ensure that they have not been adversely affected by the new changes. RAID level 6 will further be assessed and tested. RAID `N` work may be merged into the NETBSD tree as the replacement for the existing RAID1.
 
 ## lessons learnt
-Participating in Google Summer of Code with NetBSD has been very impactful. I have gathered lots of experience with multithreading in the kernel and also gained a deeper undertanding of how storage systems operate. I would encourage anyone who wants to gain deeper understanding of computer systems to consider taking on Google summer of Code projects with NetBSD.
+Participating in Google Summer of Code with NetBSD has been very impactful. I have gathered lots of experience with multithreading in the kernel and also gained a deeper understanding of how storage systems operate. I would encourage anyone who wants to gain deeper understanding of computer systems to consider taking on Google summer of Code projects with NetBSD.
 
-## Acknowledgement
+## Acknowledgment
 
 I am grateful to Greg Oster, my mentor, and the NetBSD community for their massive support towards the completion of this project.
