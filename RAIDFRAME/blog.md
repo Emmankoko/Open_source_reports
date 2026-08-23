@@ -47,7 +47,7 @@ The `/dev/dk*` are the NetBSD disk partition (wedge) driver used for the indepen
 
 This, by default, sets up a 128 sectors per stripe unit and a first in first out queuing algorithm and a max queue length of 100.
 
-This can be similarly translated into the raid.conf structure in the setup below.
+This can be similarly translated into the `raid.conf` structure in the setup below.
 
 ```
 # numrow numcol numspare
