@@ -1,10 +1,10 @@
-RAIDFRAME Project Developments in NetBSD
+RAIDframe Project Developments in NetBSD
 
 The Redundant Array of Independent Disks(RAID) framework is a disk management
 framework developed by Carnegie-Mellon University. NetBSD uses RAIDframe as one
 of its disks management modules.
 It involves setting up multiple disks and creating a disk unit from them.
-The current NetBSD Raidframe framework supports several levels of disks arrangement
+The current NetBSD RAIDframe framework supports several levels of disks arrangement
 in a single array. see raid(4).
 
 RAID level 1 involves mirroring two disks containing the same data.
@@ -67,9 +67,9 @@ This can be similarly translated into the raid.conf structure in the setup below
 
 Project deliverables
 
-- RAIDFRAME Layout
+- RAIDframe Layout
 
-A new layout structure is introduced for RAIDFRAME level `N`. number of primary disk remains 1.
+A new layout structure is introduced for RAIDframe level `N`. number of primary disk remains 1.
 number of parity/secondary becomes number of disks - 1. The rest of the layout component
 for RAID 1(stripe related properties) remains same hence adopted into RAID `N`.
 
@@ -87,13 +87,13 @@ The number of PDAs are dynamically defined by the number parity columns at runti
 
 - DAG execution
 
-RAIDFRAME uses DAGs to fire IO nodes for reads and writes. These DAG nodes are also PDA dependent.
+RAIDframe uses DAGs to fire IO nodes for reads and writes. These DAG nodes are also PDA dependent.
 The DAG node creation structure also needed to be updated to accommodate more than two
 PDAs when using the level `N`.
 
 - Reconstruction
 
-RAIDFRAME Reconstruction has been updated to make room for RAID level `N`. when a disk fails,
+RAIDframe Reconstruction has been updated to make room for RAID level `N`. when a disk fails,
 the current algorithm identifies a non-dead disk and reads the content of that disk
 and writes to the spare disk. new checks for RAID N has been added to the code to read from
 only one non-dead disk and write to the spare disk. This avoids trying to randomly read and write across
@@ -108,7 +108,7 @@ data management and reducing the risk of data loss in any case of disk failure.
 
 
 
-RAIDFRAME scrubbing
+RAIDframe scrubbing
 
 The scrubbing implementation is a disk sector health check of all components in a disk array.
 Disks sectors are read accorss every stripe in the components and the I/O returns number of
