@@ -144,6 +144,7 @@ Consider a hundred-striped three disks raid 5 array:
 ```sh
 raidctl raid5 scrub percentage 20 30
 ```
+
 This initiates a scrub of the RAID components starting at the twentieth percentile to the thirtieth percentile of all components in the array.
 The stripe indexes that will be read for the command above are mathematically represented in a `$start_stripe` and `$end_stripe` range below:
 
