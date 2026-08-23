@@ -96,7 +96,7 @@ according to the value set in `SectorsPerStripeUnit` in `raid.conf`, or 128 by d
 So 128 sector blocks are written to each stripe as defined by the PDAs.
 
 For two disk in a RAID 1 setup, a single stripe write is defined by one PDA for each column.
-For the introduction of n-way RAID 1, the number of PDAs cannot be known at compile time.
+For the introduction of N-way RAID 1, the number of PDAs cannot be known at compile time.
 The number of PDAs are dynamically defined by the number parity columns at runtime. This is because, the number of secondary disks in an N-way setup can vary as compared to RAID 1 which is known to have one primary and one secondary disk.
 
 #### DAG execution
